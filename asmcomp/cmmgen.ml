@@ -1700,7 +1700,7 @@ and transl_ccall env prim args dbg =
 and transl_prim_1 env p arg dbg =
   match p with
   (* Generic operations *)
-    Pidentity ->
+    Pidentity | Popaque ->
       transl env arg
   | Pignore ->
       return_unit(remove_unit (transl env arg))
@@ -1803,8 +1803,8 @@ and transl_prim_1 env p arg dbg =
       tag_int (Cop(Cextcall("caml_bswap16_direct", typ_int, false,
                             Debuginfo.none),
                    [untag_int (transl env arg)]))
-  | _ ->
-      fatal_error "Cmmgen.transl_prim_1"
+  | prim ->
+      fatal_errorf "Cmmgen.transl_prim_1: %a" Printlambda.primitive prim
 
 and transl_prim_2 env p arg1 arg2 dbg =
   match p with
@@ -2075,8 +2075,8 @@ and transl_prim_2 env p arg1 arg2 dbg =
       tag_int (Cop(Ccmpi(transl_comparison cmp),
                      [transl_unbox_int env bi arg1;
                       transl_unbox_int env bi arg2]))
-  | _ ->
-      fatal_error "Cmmgen.transl_prim_2"
+  | prim ->
+      fatal_errorf "Cmmgen.transl_prim_2: %a" Printlambda.primitive prim
 
 and transl_prim_3 env p arg1 arg2 arg3 dbg =
   match p with
@@ -2212,8 +2212,8 @@ and transl_prim_3 env p arg1 arg2 arg3 dbg =
                                           (Cconst_int 7)) idx
                       (unaligned_set_64 ba_data idx newval))))))
 
-  | _ ->
-    fatal_error "Cmmgen.transl_prim_3"
+  | prim ->
+      fatal_errorf "Cmmgen.transl_prim_3: %a" Printlambda.primitive prim
 
 and transl_unbox_float env = function
     Uconst(Uconst_ref(_, Some (Uconst_float f))) -> Cconst_float f
@@ -2571,9 +2571,9 @@ let transl_all_functions_and_emit_all_constants cont =
   in
   aux StringSet.empty cont
 
-(* Build the table of GC roots for toplevel modules *)
+(* Build the NULL terminated array of gc roots *)
 
-let emit_module_roots_table ~symbols cont =
+let emit_gc_roots_table ~symbols cont =
   let table_symbol = Compilenv.make_symbol (Some "gc_roots") in
   Cdata(Cglobal_symbol table_symbol ::
         Cdefine_symbol table_symbol ::
@@ -2609,7 +2609,7 @@ let emit_preallocated_blocks preallocated_blocks cont =
     List.map (fun ({ Clambda.symbol }:Clambda.preallocated_block) -> symbol)
       preallocated_blocks
   in
-  let c1 = emit_module_roots_table ~symbols cont in
+  let c1 = emit_gc_roots_table ~symbols cont in
   List.fold_left preallocate_block c1 preallocated_blocks
 
 (* Translate a compilation unit *)
