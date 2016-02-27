@@ -80,9 +80,8 @@ val out_of_heap_tag : int
 val unaligned_tag : int   (* should never happen @since 3.11.0 *)
 
 val extension_constructor : 'a -> extension_constructor
-  [@@inline always]
-val extension_name : extension_constructor -> string
-val extension_id : extension_constructor -> int
+val extension_name : extension_constructor -> string [@@inline always]
+val extension_id : extension_constructor -> int [@@inline always]
 
 (** The following two functions are deprecated.  Use module {!Marshal}
     instead. *)

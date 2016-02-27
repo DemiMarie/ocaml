@@ -80,13 +80,11 @@ let extension_constructor x =
     if (tag name) = string_tag then (obj slot : extension_constructor)
     else invalid_arg "Obj.extension_constructor"
 
-[@@inline always]
 let extension_name (slot : extension_constructor) =
-  (obj (field (repr slot) 0) : string)
+  (obj (field (repr slot) 0) : string) [@@inline always]
 
-[@@inline always]
 let extension_id (slot : extension_constructor) =
-  (obj (field (repr slot) 1) : int)
+  (obj (field (repr slot) 1) : int) [@@inline always]
 
 module Ephemeron = struct
   type obj_t = t
