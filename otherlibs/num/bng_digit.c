@@ -98,7 +98,7 @@
 #ifndef BngMult
 /* resl = low  digit of product arg1 * arg2
    resh = high digit of product arg1 * arg2. */
-#if SIZEOF_PTR == 4 && defined(ARCH_UINT64_TYPE)
+#if SIZE_MAX == 0xffffffffULL
 #define BngMult(resh,resl,arg1,arg2) {                                      \
   ARCH_UINT64_TYPE p = (ARCH_UINT64_TYPE)(arg1) * (ARCH_UINT64_TYPE)(arg2); \
   resh = p >> 32;                                                           \
