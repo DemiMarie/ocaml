@@ -380,7 +380,7 @@ let rec compare_num_string s1 s2 i len =
  and c2 = int_of_char s2.[i] in
  match compare_int c1 c2 with
  | 0 -> compare_num_string s1 s2 (succ i) len
- | c -> c;;
+ | c -> c
 
 (* Position of the leading digit of the decimal expansion          *)
 (* of a strictly positive rational number                          *)
@@ -390,7 +390,7 @@ let rec compare_num_string s1 s2 i len =
 
 (* Tests if s has only zeros characters from index i to index lim *)
 let rec only_zeros s i lim =
- i >= lim || s.[i] == '0' && only_zeros s (succ i) lim;;
+ i >= lim || s.[i] == '0' && only_zeros s (succ i) lim
 
 (* Nota : for a big_int we have msd_ratio = nums_digits_big_int -1 *)
 let msd_ratio r =
@@ -413,7 +413,7 @@ let msd_ratio r =
            if only_zeros str_den size_min size_den then m
            else pred m
       end
-;;
+
 
 (* Decimal approximations of rational numbers *)
 

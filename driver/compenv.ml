@@ -75,12 +75,12 @@ let is_unit_name name =
     done;
     true
   with Exit -> false
-;;
+
 
 let check_unit_name ppf filename name =
   if not (is_unit_name name) then
     Location.print_warning (Location.in_file filename) ppf
-      (Warnings.Bad_module_name name);;
+      (Warnings.Bad_module_name name)
 
 (* Compute name of module from output file name *)
 let module_of_filename ppf inputfile outputprefix =
@@ -94,7 +94,7 @@ let module_of_filename ppf inputfile outputprefix =
   let name = String.capitalize_ascii name in
   check_unit_name ppf inputfile name;
   name
-;;
+
 
 type filename = string
 

@@ -55,7 +55,7 @@ external synchronize : unit -> unit = "caml_gr_synchronize"
 let auto_synchronize = function
   | true -> display_mode true; remember_mode true; synchronize ()
   | false -> display_mode false; remember_mode true
-;;
+
 
 
 (* Colors *)
@@ -86,7 +86,7 @@ let plots points =
     let (x, y) = points.(i) in
     plot x y;
   done
-;;
+
 external point_color : int -> int -> color = "caml_gr_point_color"
 external moveto : int -> int -> unit = "caml_gr_moveto"
 external current_x : unit -> int = "caml_gr_current_x"
@@ -100,7 +100,7 @@ external raw_draw_rect : int -> int -> int -> int -> unit = "caml_gr_draw_rect"
 let draw_rect x y w h =
   if w < 0 || h < 0 then raise (Invalid_argument "draw_rect")
   else raw_draw_rect x y w h
-;;
+
 
 let draw_poly, draw_poly_line =
   let dodraw close_flag points =
@@ -115,7 +115,7 @@ let draw_poly, draw_poly_line =
       moveto savex savey;
     end;
   in dodraw true, dodraw false
-;;
+
 let draw_segments segs =
   let (savex, savey) = current_point () in
   for i = 0 to Array.length segs - 1 do
@@ -123,15 +123,14 @@ let draw_segments segs =
     moveto x1 y1;
     lineto x2 y2;
   done;
-  moveto savex savey;
-;;
+  moveto savex savey
 
 external raw_draw_arc : int -> int -> int -> int -> int -> int -> unit
                = "caml_gr_draw_arc" "caml_gr_draw_arc_nat"
 let draw_arc x y rx ry a1 a2 =
   if rx < 0 || ry < 0 then raise (Invalid_argument "draw_arc/ellipse/circle")
   else raw_draw_arc x y rx ry a1 a2
-;;
+
 
 let draw_ellipse x y rx ry = draw_arc x y rx ry 0 360
 let draw_circle x y r = draw_arc x y r r 0 360
@@ -140,13 +139,13 @@ external raw_set_line_width : int -> unit = "caml_gr_set_line_width"
 let set_line_width w =
   if w < 0 then raise (Invalid_argument "set_line_width")
   else raw_set_line_width w
-;;
+
 
 external raw_fill_rect : int -> int -> int -> int -> unit = "caml_gr_fill_rect"
 let fill_rect x y w h =
   if w < 0 || h < 0 then raise (Invalid_argument "fill_rect")
   else raw_fill_rect x y w h
-;;
+
 
 external fill_poly : (int * int) array -> unit = "caml_gr_fill_poly"
 external raw_fill_arc : int -> int -> int -> int -> int -> int -> unit
@@ -154,7 +153,7 @@ external raw_fill_arc : int -> int -> int -> int -> int -> int -> unit
 let fill_arc x y rx ry a1 a2 =
   if rx < 0 || ry < 0 then raise (Invalid_argument "fill_arc/ellipse/circle")
   else raw_fill_arc x y rx ry a1 a2
-;;
+
 
 let fill_ellipse x y rx ry = fill_arc x y rx ry 0 360
 let fill_circle x y r = fill_arc x y r r 0 360
@@ -234,12 +233,12 @@ external sound : int -> int -> unit = "caml_gr_sound"
 let sub (x1, y1) (x2, y2) = (x1 -. x2, y1 -. y2)
 and middle (x1, y1) (x2, y2) = ((x1 +. x2) /. 2.0,  (y1 +. y2) /. 2.0)
 and area (x1, y1) (x2, y2) = abs_float (x1 *. y2 -. x2 *. y1)
-and norm (x1, y1) = sqrt (x1 *. x1 +. y1 *. y1);;
+and norm (x1, y1) = sqrt (x1 *. x1 +. y1 *. y1)
 
 let test a b c d =
  let v = sub d a in
  let s = norm v in
- area v (sub a b) <= s && area v (sub a c) <= s;;
+ area v (sub a b) <= s && area v (sub a c) <= s
 
 let spline a b c d =
   let rec spl accu a b c d =
@@ -251,7 +250,7 @@ let spline a b c d =
    let c' = middle o d' in
    let i = middle b' c' in
    spl  (spl accu a a' b' i) i c' d' d in
-  spl [a] a b c d;;
+  spl [a] a b c d
 
 let curveto b c (x, y as d) =
  let float_point (x, y) = (float_of_int x, float_of_int y) in
@@ -263,4 +262,4 @@ let curveto b c (x, y as d) =
     (float_point b) (float_point c) (float_point d) in
  draw_poly_line
   (Array.of_list (List.map int_point points));
- moveto x y;;
+ moveto x y

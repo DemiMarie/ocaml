@@ -530,7 +530,7 @@ let rec mark_loops_rec visited ty =
 
 let mark_loops ty =
   normalize_type Env.empty ty;
-  mark_loops_rec [] ty;;
+  mark_loops_rec [] ty
 
 let reset_loop_marks () =
   visited_objects := []; aliased := []; delayed := []
@@ -1525,7 +1525,7 @@ let unification_error env unif tr txt1 ppf txt2 =
 let report_unification_error ppf env ?(unif=true)
     tr txt1 txt2 =
   wrap_printing_env env (fun () -> unification_error env unif tr txt1 ppf txt2)
-;;
+
 
 let trace fst keep_last txt ppf tr =
   print_labels := not !Clflags.classic;

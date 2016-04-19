@@ -131,7 +131,7 @@ type error =
   | Unterminated_string
   | Unterminated_string_in_comment
   | Keyword_as_label of string
-;;
+
 
 exception Error of error * int * int
 
@@ -238,9 +238,9 @@ let char_for_decimal_code lexbuf i =
   Char.chr(c land 0xFF)
 
 (* To store the position of the beginning of a string and comment *)
-let string_start_pos = ref 0;;
-let comment_start_pos = ref [];;
-let in_comment () = !comment_start_pos <> [];;
+let string_start_pos = ref 0
+let comment_start_pos = ref []
+let in_comment () = !comment_start_pos <> []
 
 (* Error report *)
 
@@ -257,7 +257,7 @@ let report_error ppf = function
       fprintf ppf "This comment contains an unterminated string literal"
   | Keyword_as_label kwd ->
       fprintf ppf "`%s' is a keyword, it cannot be used as label name" kwd
-;;
+
 
 }
 

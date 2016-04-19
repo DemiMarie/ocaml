@@ -39,8 +39,8 @@ let mkcf ?attrs ?docs d =
 
 let mkrhs rhs pos = mkloc rhs (rhs_loc pos)
 
-let reloc_pat x = { x with ppat_loc = symbol_rloc () };;
-let reloc_exp x = { x with pexp_loc = symbol_rloc () };;
+let reloc_pat x = { x with ppat_loc = symbol_rloc () }
+let reloc_exp x = { x with pexp_loc = symbol_rloc () }
 
 let mkoperator name pos =
   let loc = rhs_loc pos in

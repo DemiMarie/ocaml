@@ -179,7 +179,7 @@ let convert_impl buffer =
         if List.mem token [CLASS; EXTERNAL; EXCEPTION; FUNCTOR; LET;
                            MODULE; FUNCTOR; TYPE; VAL]
         then "\n"
-        else if token = OPEN then "" else ";;\n\n"
+        else if token = OPEN then "" else "\n\n"
       in
       Buffer.add_string output_buffer sep;
       Buffer.add_substring output_buffer text s (String.length text - s)

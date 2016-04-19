@@ -134,7 +134,7 @@ val host : string
 val target : string
         (* Whether the compiler is a cross-compiler *)
 
-val print_config : out_channel -> unit;;
+val print_config : out_channel -> unit
 
 val flambda : bool
         (* Whether the compiler was configured for flambda *)

@@ -318,23 +318,23 @@ let gcd_big_int bi1 bi2 =
 
 (* Coercion operators *)
 
-let monster_big_int = big_int_of_int monster_int;;
+let monster_big_int = big_int_of_int monster_int
 
-let monster_nat = monster_big_int.abs_value;;
+let monster_nat = monster_big_int.abs_value
 
 let is_int_big_int bi =
   num_digits_big_int bi == 1 &&
   match compare_nat bi.abs_value 0 1 monster_nat 0 1 with
   | 0 -> bi.sign == -1
   | -1 -> true
-  | _ -> false;;
+  | _ -> false
 
 let int_of_big_int bi =
   try let n = int_of_nat bi.abs_value in
       if bi.sign = -1 then - n else n
   with Failure _ ->
     if eq_big_int bi monster_big_int then monster_int
-    else failwith "int_of_big_int";;
+    else failwith "int_of_big_int"
 
 let big_int_of_nativeint i =
   if i = 0n then
@@ -433,7 +433,7 @@ let sys_big_int_of_string_aux s ofs len sgn base =
   let n = sys_nat_of_string base s ofs len in
   if is_zero_nat n 0 (length_nat n) then zero_big_int
   else {sign = sgn; abs_value = n}
-;;
+
 
 let sys_big_int_of_string_base s ofs len sgn =
   if len < 1 then failwith "sys_big_int_of_string";
@@ -447,7 +447,7 @@ let sys_big_int_of_string_base s ofs len sgn =
     | ('0', 'b') | ('0', 'B') ->
         sys_big_int_of_string_aux s (ofs+2) (len-2) sgn 2
     | _ -> sys_big_int_of_string_aux s ofs len sgn 10
-;;
+
 
 let sys_big_int_of_string s ofs len =
   if len < 1 then failwith "sys_big_int_of_string";
@@ -455,7 +455,7 @@ let sys_big_int_of_string s ofs len =
   | '-' -> sys_big_int_of_string_base s (ofs+1) (len-1) (-1)
   | '+' -> sys_big_int_of_string_base s (ofs+1) (len-1) 1
   | _ -> sys_big_int_of_string_base s ofs len 1
-;;
+
 
 let big_int_of_string s =
   sys_big_int_of_string s 0 (String.length s)

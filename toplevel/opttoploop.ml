@@ -454,7 +454,7 @@ let use_silently ppf name =
 (* Reading function for interactive use *)
 
 let first_line = ref true
-let got_eof = ref false;;
+let got_eof = ref false
 
 let read_input_default prompt buffer len =
   output_string Pervasives.stdout prompt; flush Pervasives.stdout;
@@ -517,7 +517,7 @@ let load_ocamlinit ppf =
        let home_init = Filename.concat (Sys.getenv "HOME") ".ocamlinit" in
        if Sys.file_exists home_init then ignore (use_silently ppf home_init)
      with Not_found -> ()
-;;
+
 
 let set_paths () =
   (* Add whatever -I options have been specified on the command line,

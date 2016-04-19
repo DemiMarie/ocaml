@@ -1,27 +1,27 @@
 {
-open Lexing;;
-open Latexmacros;;
+open Lexing
+open Latexmacros
 
-let delimiter = ref (char_of_int 0);;
+let delimiter = ref (char_of_int 0)
 
 let upto delim lexfun lexbuf =
   let old_delim = !delimiter in
   delimiter := delim;
   lexfun lexbuf;
-  delimiter := old_delim;;
+  delimiter := old_delim
 
-let verb_delim = ref (char_of_int 0);;
+let verb_delim = ref (char_of_int 0)
 
-let brace_nesting = ref 0;;
+let brace_nesting = ref 0
 
 let rindex c s =
   let rec find i =
     if i < 0 then raise Not_found else
     if s.[i] = c then i else find (i-1) in
-  find (String.length s - 1);;
+  find (String.length s - 1)
 
-let first_caml_line = ref true;;
-let in_caml = ref false;;
+let first_caml_line = ref true
+let in_caml = ref false
 }
 
 rule main = parse

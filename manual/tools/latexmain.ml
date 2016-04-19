@@ -1,4 +1,4 @@
 let main () =
-  Latexscan.main (Lexing.from_channel stdin);;
+  Latexscan.main (Lexing.from_channel stdin)
 
-Printexc.print main (); exit 0;;
+Printexc.print main (); exit 0

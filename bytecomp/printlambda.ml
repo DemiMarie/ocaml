@@ -75,7 +75,7 @@ let boxed_integer_mark name = function
   | Pint64 -> Printf.sprintf "Int64.%s" name
 
 let print_boxed_integer name ppf bi =
-  fprintf ppf "%s" (boxed_integer_mark name bi);;
+  fprintf ppf "%s" (boxed_integer_mark name bi)
 
 let print_bigarray name unsafe kind ppf layout =
   fprintf ppf "Bigarray.%s[%s,%s]"
@@ -105,7 +105,7 @@ let record_rep ppf r =
   | Record_inlined i -> fprintf ppf "inlined(%i)" i
   | Record_float -> fprintf ppf "float"
   | Record_extension -> fprintf ppf "ext"
-;;
+
 
 let string_of_loc_kind = function
   | Loc_FILE -> "loc_FILE"

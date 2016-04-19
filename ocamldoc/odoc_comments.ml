@@ -17,7 +17,7 @@
 
 open Odoc_types
 
-let print_DEBUG s = print_string s ; print_newline ();;
+let print_DEBUG s = print_string s ; print_newline ()
 
 (** This variable contains the regular expression representing a blank but not a '\n'.*)
 let simple_blank = "[ \013\009\012]"

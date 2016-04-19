@@ -689,7 +689,7 @@ type rhs_kind =
   | RHS_block of int
   | RHS_floatblock of int
   | RHS_nonrec
-;;
+
 let rec expr_size env = function
   | Uvar id ->
       begin try Ident.find_same id env with Not_found -> RHS_nonrec end

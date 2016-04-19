@@ -28,7 +28,7 @@ let try_finally work cleanup =
   let result = (try work () with e -> cleanup (); raise e) in
   cleanup ();
   result
-;;
+
 
 type ref_and_value = R : 'a ref * 'a -> ref_and_value
 
@@ -531,7 +531,7 @@ module Color = struct
     | Magenta
     | Cyan
     | White
-  ;;
+  
 
   type style =
     | FG of color (* foreground *)

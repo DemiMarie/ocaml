@@ -2,15 +2,15 @@
 
 (* recursive types *)
 class c = object (self) method m = 1 method s = self end
-module type S = sig type t = private #c end;;
+module type S = sig type t = private #c end
 
 module M : S = struct type t = c end
-module type S' = S with type t = c;;
+module type S' = S with type t = c
 
 class d = object inherit c method n = 2 end
-module type S2 = S with type t = private #d;;
-module M2 : S = struct type t = d end;;
-module M3 : S = struct type t = private #d end;;
+module type S2 = S with type t = private #d
+module M2 : S = struct type t = d end
+module M3 : S = struct type t = private #d end
 
 module T1 = struct
   type ('a,'b) a = [`A of 'a | `B of 'b]
@@ -71,7 +71,7 @@ end = struct
   type c = ci
   let create = new ci
 end
-let f (x : M6.c) = x#move 3; x#x;;
+let f (x : M6.c) = x#move 3; x#x
 
 module M : sig type t = private [> `A of bool] end =
   struct type t = [`A of int] end

@@ -27,7 +27,7 @@ type error =
   | Unterminated_string_in_comment of Location.t * Location.t
   | Keyword_as_label of string
   | Invalid_literal of string
-;;
+
 
 exception Error of error * Location.t
 
@@ -36,8 +36,8 @@ open Format
 val report_error: formatter -> error -> unit
  (* Deprecated.  Use Location.{error_of_exn, report_error}. *)
 
-val in_comment : unit -> bool;;
-val in_string : unit -> bool;;
+val in_comment : unit -> bool
+val in_string : unit -> bool
 
 
 val print_warnings : bool ref

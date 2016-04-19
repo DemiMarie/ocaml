@@ -135,7 +135,7 @@ let get_type_path ty tenv =
 (*************************************)
 
 open Format
-;;
+
 
 let is_cons = function
 | {cstr_name = "::"} -> true

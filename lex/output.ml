@@ -147,6 +147,6 @@ let output_lexdef ic oc oci header rh tables entry_points trailer =
            output_string oc "and ";
            output_entry ic oc has_refill oci e)
         entries;
-      output_string oc ";;\n\n";
+      output_string oc "\n\n";
   end;
   copy_chunk ic oc oci trailer false

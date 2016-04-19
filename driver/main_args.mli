@@ -52,7 +52,7 @@ module type Common_options = sig
   val _dlambda : unit -> unit
 
   val anonymous : string -> unit
-end;;
+end
 
 module type Compiler_options = sig
   val _a : unit -> unit
@@ -96,7 +96,7 @@ module type Compiler_options = sig
   val _nopervasives : unit -> unit
   val _dtimings : unit -> unit
 end
-;;
+
 
 module type Bytecomp_options = sig
   include Common_options
@@ -113,7 +113,7 @@ module type Bytecomp_options = sig
   val _dinstr : unit -> unit
 
   val _use_prims : string -> unit
-end;;
+end
 
 module type Bytetop_options = sig
   include Common_options
@@ -124,7 +124,7 @@ module type Bytetop_options = sig
   val _stdin : unit -> unit
 
   val _dinstr : unit -> unit
-end;;
+end
 
 module type Optcommon_options = sig
   val _compact : unit -> unit
@@ -173,7 +173,7 @@ module type Optcommon_options = sig
   val _dscheduling :  unit -> unit
   val _dlinear :  unit -> unit
   val _dstartup :  unit -> unit
-end;;
+end
 
 module type Optcomp_options = sig
   include Common_options
@@ -185,7 +185,7 @@ module type Optcomp_options = sig
   val _pp : string -> unit
   val _S : unit -> unit
   val _shared : unit -> unit
-end;;
+end
 
 module type Opttop_options = sig
   include Common_options
@@ -196,7 +196,7 @@ module type Opttop_options = sig
   val _nopromptcont : unit -> unit
   val _S : unit -> unit
   val _stdin : unit -> unit
-end;;
+end
 
 module type Ocamldoc_options = sig
   include Common_options
@@ -212,14 +212,14 @@ module type Ocamldoc_options = sig
   val _v : unit -> unit
   val _verbose : unit -> unit
   val _vmthread : unit -> unit
-end;;
+end
 
 module type Arg_list = sig
     val list : (string * Arg.spec * string) list
-end;;
+end
 
-module Make_bytecomp_options (F : Bytecomp_options) : Arg_list;;
-module Make_bytetop_options (F : Bytetop_options) : Arg_list;;
-module Make_optcomp_options (F : Optcomp_options) : Arg_list;;
-module Make_opttop_options (F : Opttop_options) : Arg_list;;
-module Make_ocamldoc_options (F : Ocamldoc_options) : Arg_list;;
+module Make_bytecomp_options (F : Bytecomp_options) : Arg_list
+module Make_bytetop_options (F : Bytetop_options) : Arg_list
+module Make_optcomp_options (F : Optcomp_options) : Arg_list
+module Make_opttop_options (F : Opttop_options) : Arg_list
+module Make_ocamldoc_options (F : Ocamldoc_options) : Arg_list

@@ -80,7 +80,7 @@ type t =
   | Ambiguous_pattern of string list        (* 57 *)
   | No_cmx_file of string                   (* 58 *)
   | Assignment_to_non_mutable_value         (* 59 *)
-;;
+
 
 (* If you remove a warning, leave a hole in the numbering.  NEVER change
    the numbers of existing warnings.
@@ -148,10 +148,10 @@ let number = function
   | Ambiguous_pattern _ -> 57
   | No_cmx_file _ -> 58
   | Assignment_to_non_mutable_value -> 59
-;;
+
 
 let last_warning_number = 59
-;;
+
 
 (* Must be the max number returned by the [number] function. *)
 
@@ -185,7 +185,7 @@ let letter = function
   | 'y' -> [26]
   | 'z' -> [27]
   | _ -> assert false
-;;
+
 
 type state =
   {
@@ -204,8 +204,8 @@ let backup () = !current
 
 let restore x = current := x
 
-let is_active x = (!current).active.(number x);;
-let is_error x = (!current).error.(number x);;
+let is_active x = (!current).active.(number x)
+let is_error x = (!current).error.(number x)
 
 let parse_opt error active flags s =
   let set i = flags.(i) <- true in
@@ -256,7 +256,7 @@ let parse_opt error active flags s =
     | _ -> error ()
   in
   loop 0
-;;
+
 
 let parse_options errflag s =
   let error = Array.copy (!current).error in
@@ -265,11 +265,11 @@ let parse_options errflag s =
   current := {error; active}
 
 (* If you change these, don't forget to change them in man/ocamlc.m *)
-let defaults_w = "+a-4-6-7-9-27-29-32..39-41..42-44-45-48-50";;
-let defaults_warn_error = "-a+31";;
+let defaults_w = "+a-4-6-7-9-27-29-32..39-41..42-44-45-48-50"
+let defaults_warn_error = "-a+31"
 
-let () = parse_options false defaults_w;;
-let () = parse_options true defaults_warn_error;;
+let () = parse_options false defaults_w
+let () = parse_options true defaults_warn_error
 
 let message = function
   | Comment_start -> "this is the start of a comment."
@@ -466,9 +466,9 @@ let message = function
       "A potential assignment to a non-mutable value was detected \n\
         in this source file.  Such assignments may generate incorrect code \n\
         when using Flambda."
-;;
 
-let nerrors = ref 0;;
+
+let nerrors = ref 0
 
 let print ppf w =
   let msg = message w in
@@ -476,9 +476,9 @@ let print ppf w =
   Format.fprintf ppf "%d: %s" num msg;
   Format.pp_print_flush ppf ();
   if (!current).error.(num) then incr nerrors
-;;
 
-exception Errors of int;;
+
+exception Errors of int
 
 let reset_fatal () =
   nerrors := 0
@@ -488,8 +488,7 @@ let check_fatal () =
     let e = Errors !nerrors in
     nerrors := 0;
     raise e;
-  end;
-;;
+  end
 
 let descriptions =
   [
@@ -566,7 +565,7 @@ let descriptions =
    58, "Missing cmx file";
    59, "Assignment to non-mutable value";
   ]
-;;
+
 
 let help_warnings () =
   List.iter (fun (i, s) -> Printf.printf "%3i %s\n" i s) descriptions;
@@ -583,4 +582,4 @@ let help_warnings () =
           (String.concat ", " (List.map string_of_int l))
   done;
   exit 0
-;;
+

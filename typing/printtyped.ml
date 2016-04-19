@@ -13,33 +13,31 @@
 (*                                                                        *)
 (**************************************************************************)
 
-open Asttypes;;
-open Format;;
-open Lexing;;
-open Location;;
-open Typedtree;;
+open Asttypes
+open Format
+open Lexing
+open Location
+open Typedtree
 
 let fmt_position f l =
   if l.pos_lnum = -1
   then fprintf f "%s[%d]" l.pos_fname l.pos_cnum
   else fprintf f "%s[%d,%d+%d]" l.pos_fname l.pos_lnum l.pos_bol
                (l.pos_cnum - l.pos_bol)
-;;
+
 
 let fmt_location f loc =
   fprintf f "(%a..%a)" fmt_position loc.loc_start fmt_position loc.loc_end;
-  if loc.loc_ghost then fprintf f " ghost";
-;;
+  if loc.loc_ghost then fprintf f " ghost"
 
 let rec fmt_longident_aux f x =
   match x with
   | Longident.Lident (s) -> fprintf f "%s" s;
   | Longident.Ldot (y, s) -> fprintf f "%a.%s" fmt_longident_aux y s;
   | Longident.Lapply (y, z) ->
-      fprintf f "%a(%a)" fmt_longident_aux y fmt_longident_aux z;
-;;
+      fprintf f "%a(%a)" fmt_longident_aux y fmt_longident_aux z
 
-let fmt_longident f x = fprintf f "\"%a\"" fmt_longident_aux x.txt;;
+let fmt_longident f x = fprintf f "\"%a\"" fmt_longident_aux x.txt
 
 let fmt_ident = Ident.print
 
@@ -48,10 +46,9 @@ let rec fmt_path_aux f x =
   | Path.Pident (s) -> fprintf f "%a" fmt_ident s;
   | Path.Pdot (y, s, _pos) -> fprintf f "%a.%s" fmt_path_aux y s;
   | Path.Papply (y, z) ->
-      fprintf f "%a(%a)" fmt_path_aux y fmt_path_aux z;
-;;
+      fprintf f "%a(%a)" fmt_path_aux y fmt_path_aux z
 
-let fmt_path f x = fprintf f "\"%a\"" fmt_path_aux x;;
+let fmt_path f x = fprintf f "\"%a\"" fmt_path_aux x
 
 let fmt_constant f x =
   match x with
@@ -63,26 +60,22 @@ let fmt_constant f x =
   | Const_float (s) -> fprintf f "Const_float %s" s;
   | Const_int32 (i) -> fprintf f "Const_int32 %ld" i;
   | Const_int64 (i) -> fprintf f "Const_int64 %Ld" i;
-  | Const_nativeint (i) -> fprintf f "Const_nativeint %nd" i;
-;;
+  | Const_nativeint (i) -> fprintf f "Const_nativeint %nd" i
 
 let fmt_mutable_flag f x =
   match x with
   | Immutable -> fprintf f "Immutable";
-  | Mutable -> fprintf f "Mutable";
-;;
+  | Mutable -> fprintf f "Mutable"
 
 let fmt_virtual_flag f x =
   match x with
   | Virtual -> fprintf f "Virtual";
-  | Concrete -> fprintf f "Concrete";
-;;
+  | Concrete -> fprintf f "Concrete"
 
 let fmt_override_flag f x =
   match x with
   | Override -> fprintf f "Override";
-  | Fresh -> fprintf f "Fresh";
-;;
+  | Fresh -> fprintf f "Fresh"
 
 let fmt_closed_flag f x =
   match x with
@@ -92,25 +85,22 @@ let fmt_closed_flag f x =
 let fmt_rec_flag f x =
   match x with
   | Nonrecursive -> fprintf f "Nonrec";
-  | Recursive -> fprintf f "Rec";
-;;
+  | Recursive -> fprintf f "Rec"
 
 let fmt_direction_flag f x =
   match x with
   | Upto -> fprintf f "Up";
-  | Downto -> fprintf f "Down";
-;;
+  | Downto -> fprintf f "Down"
 
 let fmt_private_flag f x =
   match x with
   | Public -> fprintf f "Public";
-  | Private -> fprintf f "Private";
-;;
+  | Private -> fprintf f "Private"
 
 let line i f s (*...*) =
   fprintf f "%s" (String.make (2*i) ' ');
   fprintf f s (*...*)
-;;
+
 
 let list i f ppf l =
   match l with
@@ -118,24 +108,22 @@ let list i f ppf l =
   | _ :: _ ->
      line i ppf "[\n";
      List.iter (f (i+1) ppf) l;
-     line i ppf "]\n";
-;;
+     line i ppf "]\n"
 
 let option i f ppf x =
   match x with
   | None -> line i ppf "None\n";
   | Some x ->
       line i ppf "Some\n";
-      f (i+1) ppf x;
-;;
+      f (i+1) ppf x
 
-let longident i ppf li = line i ppf "%a\n" fmt_longident li;;
-let string i ppf s = line i ppf "\"%s\"\n" s;;
+let longident i ppf li = line i ppf "%a\n" fmt_longident li
+let string i ppf s = line i ppf "\"%s\"\n" s
 let arg_label i ppf = function
   | Nolabel -> line i ppf "Nolabel\n"
   | Optional s -> line i ppf "Optional \"%s\"\n" s
   | Labelled s -> line i ppf "Labelled \"%s\"\n" s
-;;
+
 
 let attributes i ppf l =
   let i = i + 1 in
@@ -845,10 +833,10 @@ and label_x_bool_x_core_type_list i ppf x =
   | Tinherit (ct) ->
       line i ppf "Rinherit\n";
       core_type (i+1) ppf ct
-;;
 
-let interface ppf x = list 0 signature_item ppf x.sig_items;;
 
-let implementation ppf x = list 0 structure_item ppf x.str_items;;
+let interface ppf x = list 0 signature_item ppf x.sig_items
+
+let implementation ppf x = list 0 structure_item ppf x.str_items
 
 let implementation_with_coercion ppf (x, _) = implementation ppf x

@@ -22,25 +22,25 @@ let toremove = ref ([] : string list)
 let option opt () = compargs := opt :: !compargs
 let option_with_arg opt arg =
   compargs := (Filename.quote arg) :: opt :: !compargs
-;;
+
 let option_with_int opt arg =
   compargs := (string_of_int arg) :: opt :: !compargs
-;;
+
 let option_with_float opt arg =
   compargs := (string_of_float arg) :: opt :: !compargs
-;;
 
-let make_archive = ref false;;
-let with_impl = ref false;;
-let with_intf = ref false;;
-let with_mli = ref false;;
-let with_ml = ref false;;
+
+let make_archive = ref false
+let with_impl = ref false
+let with_intf = ref false
+let with_mli = ref false
+let with_ml = ref false
 
 let process_file filename =
-  if Filename.check_suffix filename ".ml" then with_ml := true;
-  if Filename.check_suffix filename ".mli" then with_mli := true;
+  (if Filename.check_suffix filename ".ml" then with_ml := true);
+  (if Filename.check_suffix filename ".mli" then with_mli := true);
   compargs := (Filename.quote filename) :: !compargs
-;;
+
 
 let usage = "Usage: ocamloptp <options> <files>\noptions are:"
 
@@ -168,12 +168,12 @@ module Options = Main_args.Make_optcomp_options (struct
   let _opaque = option "-opaque"
 
   let anonymous = process_file
-end);;
+end)
 
 let add_profarg s =
   profargs := (Filename.quote s) :: "-m" :: !profargs
-;;
 
+let () =
 let optlist =
     ("-P", Arg.String add_profarg,
            "[afilmt]  Profile constructs specified by argument (default fm):\n\
@@ -209,4 +209,4 @@ let status =
         (String.concat " " (List.rev !compargs)))
 in
 exit status
-;;
+

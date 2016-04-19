@@ -98,7 +98,7 @@ let process_file file =
           then raise End_of_file;
           if Buffer.length phrase > 0 then Buffer.add_char phrase '\n';
           Buffer.add_string phrase input;
-          not (string_match ~!".*;;[ \t]*$" input 0)
+          not (string_match ~!".*[ \t]*$" input 0)
         do
           ()
         done;
@@ -108,7 +108,7 @@ let process_file file =
         let phrase = read_phrase () in
         fprintf caml_output "%s\n" phrase;
         flush caml_output;
-        output_string caml_output "\"end_of_input\";;\n";
+        output_string caml_output "\"end_of_input\"\n";
         flush caml_output;
         let output, (b, e) = read_output () in
         let phrase =
@@ -142,9 +142,9 @@ let process_file file =
         not (string_match ~!"\\\\end{caml_eval}[ \t]*$" !input 0)
       do
         fprintf caml_output "%s\n" !input;
-        if string_match ~!".*;;[ \t]*$" !input 0 then begin
+        if string_match ~!".*[ \t]*$" !input 0 then begin
           flush caml_output;
-          output_string caml_output "\"end_of_input\";;\n";
+          output_string caml_output "\"end_of_input\"\n";
           flush caml_output;
           ignore (read_output ())
         end

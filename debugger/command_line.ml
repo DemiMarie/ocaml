@@ -304,7 +304,7 @@ let instr_run ppf lexbuf =
   ensure_loaded ();
   reset_named_values ();
   run ();
-  show_current_event ppf;;
+  show_current_event ppf
 
 let instr_reverse ppf lexbuf =
   eol lexbuf;
@@ -934,8 +934,7 @@ let info_checkpoints ppf lexbuf =
           !checkpoints))
 
 let info_one_breakpoint ppf (num, ev) =
-  fprintf ppf "%3d %10d  %s@." num ev.ev_pos (Pos.get_desc ev);
-;;
+  fprintf ppf "%3d %10d  %s@." num ev.ev_pos (Pos.get_desc ev)
 
 let info_breakpoints ppf lexbuf =
   eol lexbuf;
@@ -944,7 +943,7 @@ let info_breakpoints ppf lexbuf =
     fprintf ppf "Num    Address  Where@.";
     List.iter (info_one_breakpoint ppf) (List.rev !breakpoints);
   end
-;;
+
 
 let info_events _ppf lexbuf =
   ensure_loaded ();

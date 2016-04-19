@@ -145,7 +145,7 @@ let div_num n1 n2 =
      | Int i2 -> num_of_ratio (div_ratio_int r1 i2)
      | Big_int bi2 -> num_of_ratio (div_ratio_big_int r1 bi2)
      | Ratio r2 -> num_of_ratio (div_ratio r1 r2) end
-;;
+
 
 let ( // ) = div_num
 
@@ -159,7 +159,7 @@ let ratio_of_num = function
   Int i -> ratio_of_int i
 | Big_int bi -> ratio_of_big_int bi
 | Ratio r -> r
-;;
+
 
 (* Euclidean division and remainder.  The specification is:
 

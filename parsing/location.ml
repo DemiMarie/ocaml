@@ -19,7 +19,7 @@ let absname = ref false
     (* This reference should be in Clflags, but it would create an additional
        dependency and make bootstrapping Camlp4 more difficult. *)
 
-type t = { loc_start: position; loc_end: position; loc_ghost: bool };;
+type t = { loc_start: position; loc_end: position; loc_ghost: bool }
 
 let in_file name =
   let loc = {
@@ -29,15 +29,15 @@ let in_file name =
     pos_cnum = -1;
   } in
   { loc_start = loc; loc_end = loc; loc_ghost = true }
-;;
 
-let none = in_file "_none_";;
+
+let none = in_file "_none_"
 
 let curr lexbuf = {
   loc_start = lexbuf.lex_start_p;
   loc_end = lexbuf.lex_curr_p;
   loc_ghost = false
-};;
+}
 
 let init lexbuf fname =
   lexbuf.lex_curr_p <- {
@@ -46,25 +46,25 @@ let init lexbuf fname =
     pos_bol = 0;
     pos_cnum = 0;
   }
-;;
+
 
 let symbol_rloc () = {
   loc_start = Parsing.symbol_start_pos ();
   loc_end = Parsing.symbol_end_pos ();
   loc_ghost = false;
-};;
+}
 
 let symbol_gloc () = {
   loc_start = Parsing.symbol_start_pos ();
   loc_end = Parsing.symbol_end_pos ();
   loc_ghost = true;
-};;
+}
 
 let rhs_loc n = {
   loc_start = Parsing.rhs_start_pos n;
   loc_end = Parsing.rhs_end_pos n;
   loc_ghost = false;
-};;
+}
 
 let input_name = ref "_none_"
 let input_lexbuf = ref (None : lexbuf option)
@@ -251,7 +251,7 @@ let (msg_file, msg_line, msg_chars, msg_to, msg_colon) =
 (* return file, line, char from the given position *)
 let get_pos_info pos =
   (pos.pos_fname, pos.pos_lnum, pos.pos_cnum - pos.pos_bol)
-;;
+
 
 let setup_colors () =
   Misc.Color.setup !Clflags.color
@@ -270,14 +270,14 @@ let print_loc ppf loc =
       fprintf ppf "%s%i%s%i" msg_chars startchar msg_to endchar;
     fprintf ppf "@}"
   end
-;;
+
 
 let print ppf loc =
   setup_colors ();
   if loc.loc_start.pos_fname = "//toplevel//"
   && highlight_locations ppf [loc] then ()
   else fprintf ppf "@{<loc>%a@}%s@." print_loc loc msg_colon
-;;
+
 
 let error_prefix = "Error"
 let warning_prefix = "Warning"
@@ -286,7 +286,7 @@ let print_error_prefix ppf () =
   setup_colors ();
   fprintf ppf "@{<error>%s@}:" error_prefix;
   ()
-;;
+
 
 let print_compact ppf loc =
   if loc.loc_start.pos_fname = "//toplevel//"
@@ -297,14 +297,14 @@ let print_compact ppf loc =
     fprintf ppf "%a:%i" print_filename file line;
     if startchar >= 0 then fprintf ppf ",%i--%i" startchar endchar
   end
-;;
+
 
 let print_error ppf loc =
   print ppf loc;
   print_error_prefix ppf ()
-;;
 
-let print_error_cur_file ppf () = print_error ppf (in_file !input_name);;
+
+let print_error_cur_file ppf () = print_error ppf (in_file !input_name)
 
 let default_warning_printer loc ppf w =
   if Warnings.is_active w then begin
@@ -312,16 +312,16 @@ let default_warning_printer loc ppf w =
     print ppf loc;
     fprintf ppf "@{<warning>%s@} %a@." warning_prefix Warnings.print w
   end
-;;
 
-let warning_printer = ref default_warning_printer ;;
+
+let warning_printer = ref default_warning_printer 
 
 let print_warning loc ppf w =
   print_updating_num_loc_lines ppf (!warning_printer loc) w
-;;
 
-let formatter_for_warnings = ref err_formatter;;
-let prerr_warning loc w = print_warning loc !formatter_for_warnings w;;
+
+let formatter_for_warnings = ref err_formatter
+let prerr_warning loc w = print_warning loc !formatter_for_warnings w
 
 let echo_eof () =
   print_newline ();
@@ -410,7 +410,7 @@ let error_reporter = ref default_error_reporter
 
 let report_error ppf err =
   print_updating_num_loc_lines ppf !error_reporter err
-;;
+
 
 let error_of_printer loc print x =
   errorf_prefixed ~loc "%a@?" print x

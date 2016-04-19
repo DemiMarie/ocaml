@@ -28,9 +28,9 @@ type error =
   | Unterminated_string_in_comment of Location.t * Location.t
   | Keyword_as_label of string
   | Invalid_literal of string
-;;
 
-exception Error of error * Location.t;;
+
+exception Error of error * Location.t
 
 (* The table of keywords *)
 
@@ -129,9 +129,9 @@ let get_stored_string () =
   s
 
 (* To store the position of the beginning of a string and comment *)
-let string_start_loc = ref Location.none;;
-let comment_start_loc = ref [];;
-let in_comment () = !comment_start_loc <> [];;
+let string_start_loc = ref Location.none
+let comment_start_loc = ref []
+let in_comment () = !comment_start_loc <> []
 let is_in_string = ref false
 let in_string () = !is_in_string
 let print_warnings = ref true
@@ -197,7 +197,7 @@ let get_label_name lexbuf =
   if Hashtbl.mem keyword_table name then
     raise (Error(Keyword_as_label name, Location.curr lexbuf));
   name
-;;
+
 
 (* Update the current location with file name and line number. *)
 
@@ -212,7 +212,7 @@ let update_loc lexbuf file line absolute chars =
     pos_lnum = if absolute then line else pos.pos_lnum + line;
     pos_bol = pos.pos_cnum - chars;
   }
-;;
+
 
 let preprocessor = ref None
 
@@ -223,7 +223,7 @@ let escaped_newlines = ref false
 let warn_latin1 lexbuf =
   Location.prerr_warning (Location.curr lexbuf)
     (Warnings.Deprecated "ISO-Latin1 characters in identifiers")
-;;
+
 
 let handle_docstrings = ref true
 let comment_list = ref []

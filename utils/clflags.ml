@@ -135,11 +135,11 @@ let dont_write_files = ref false        (* set to true under ocamldoc *)
 let std_include_flag prefix =
   if !no_std_include then ""
   else (prefix ^ (Filename.quote Config.standard_library))
-;;
+
 
 let std_include_dir () =
   if !no_std_include then [] else [Config.standard_library]
-;;
+
 
 let shared = ref false (* -shared *)
 let dlcode = ref true (* not -nodynlink *)
@@ -148,11 +148,11 @@ let pic_code = ref (match Config.architecture with (* -fPIC *)
                      | "amd64" -> true
                      | _       -> false)
 
-let runtime_variant = ref "";;      (* -runtime-variant *)
+let runtime_variant = ref ""      (* -runtime-variant *)
 
 let keep_docs = ref false              (* -keep-docs *)
 let keep_locs = ref false              (* -keep-locs *)
-let unsafe_string = ref true;;         (* -safe-string / -unsafe-string *)
+let unsafe_string = ref true         (* -safe-string / -unsafe-string *)
 
 let classic_inlining = ref false       (* -Oclassic *)
 let inlining_report = ref false    (* -inlining-report *)
@@ -353,4 +353,4 @@ let parse_color_setting = function
   | "always" -> Some Misc.Color.Always
   | "never" -> Some Misc.Color.Never
   | _ -> None
-let color = ref Misc.Color.Auto ;; (* -color *)
+let color = ref Misc.Color.Auto  (* -color *)

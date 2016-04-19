@@ -1,18 +1,18 @@
 type action =
     Print of string
   | Print_arg
-  | Skip_arg;;
+  | Skip_arg
 
-let cmdtable = (Hashtbl.create 19 : (string, action list) Hashtbl.t);;
+let cmdtable = (Hashtbl.create 19 : (string, action list) Hashtbl.t)
 
 let def_macro name action =
-  Hashtbl.add cmdtable name action;;
+  Hashtbl.add cmdtable name action
 
 let find_macro name =
   try
     Hashtbl.find cmdtable name
   with Not_found ->
-    prerr_string "Unknown macro: "; prerr_endline name; [];;
+    prerr_string "Unknown macro: "; prerr_endline name; []
 
 (* General LaTeX macros *)
 
@@ -80,7 +80,7 @@ def_macro "\\end{flushleft}" [Print "</blockquote>"];
 def_macro "\\\\" [Print "<br>"];
 def_macro "\\begin{htmlonly}" [];
 def_macro "\\end{htmlonly}" [];
-();;
+()
 
 (* Macros specific to the Caml manual *)
 
@@ -145,5 +145,5 @@ def_macro "\\pdfchapter" [Skip_arg];
 def_macro "\\pdfchapterfold" [Skip_arg; Skip_arg];
 def_macro "\\pdfsection" [Skip_arg];
 def_macro "\\transl" [Print "<"; Print_arg; Print ">"];
-();;
+()
 

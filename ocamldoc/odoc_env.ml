@@ -15,7 +15,7 @@
 
 (** Environment for finding complete names from relative names. *)
 
-let print_DEBUG s = print_string s ; print_newline ();;
+let print_DEBUG s = print_string s ; print_newline ()
 
 module Name = Odoc_name
 

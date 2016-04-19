@@ -13,33 +13,33 @@
 (*                                                                        *)
 (**************************************************************************)
 
-open Arith_flags;;
+open Arith_flags
 
 let get_error_when_null_denominator () =
   !error_when_null_denominator_flag
 and set_error_when_null_denominator choice =
- error_when_null_denominator_flag := choice;;
+ error_when_null_denominator_flag := choice
 
 let get_normalize_ratio () = !normalize_ratio_flag
-and set_normalize_ratio choice = normalize_ratio_flag := choice;;
+and set_normalize_ratio choice = normalize_ratio_flag := choice
 
 let get_normalize_ratio_when_printing () =
   !normalize_ratio_when_printing_flag
 and set_normalize_ratio_when_printing choice =
- normalize_ratio_when_printing_flag := choice;;
+ normalize_ratio_when_printing_flag := choice
 
 let get_floating_precision () = !floating_precision
-and set_floating_precision i = floating_precision := i;;
+and set_floating_precision i = floating_precision := i
 
 let get_approx_printing () = !approx_printing_flag
-and set_approx_printing b = approx_printing_flag := b;;
+and set_approx_printing b = approx_printing_flag := b
 
-let arith_print_string s = print_string s; print_string " --> ";;
+let arith_print_string s = print_string s; print_string " --> "
 
 let arith_print_bool = function
   true -> print_string "ON"
 | _ -> print_string "OFF"
-;;
+
 
 let arith_status () =
   print_newline ();
@@ -97,4 +97,4 @@ let arith_status () =
   print_string
   "     (modifiable with set_error_when_null_denominator <your choice>)";
   print_newline ()
-;;
+

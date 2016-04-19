@@ -27,7 +27,7 @@ open Location
 open Longident
 open Parsetree
 
-let prefix_symbols  = [ '!'; '?'; '~' ] ;;
+let prefix_symbols  = [ '!'; '?'; '~' ] 
 let infix_symbols = [ '='; '<'; '>'; '@'; '^'; '|'; '&'; '+'; '-'; '*'; '/';
                       '$'; '%' ]
 
@@ -47,7 +47,7 @@ let fixity_of_string  = function
 
 let view_fixity_of_exp = function
   | {pexp_desc = Pexp_ident {txt=Lident l;_};_} -> fixity_of_string l
-  | _ -> `Normal  ;;
+  | _ -> `Normal  
 
 let is_infix  = function  | `Infix _ -> true | _  -> false
 
@@ -1093,7 +1093,7 @@ class printer  ()= object(self:'self)
   method structure_item f x = begin
     match x.pstr_desc with
     | Pstr_eval (e, attrs) ->
-        pp f "@[<hov2>;;%a@]%a"
+        pp f "@[<hov2>%a@]%a"
           self#expression e
           self#item_attributes attrs
     | Pstr_type (_, []) -> assert false
@@ -1393,7 +1393,7 @@ class printer  ()= object(self:'self)
         pp_close_box f ();
     | Ptop_dir (s, da) ->
         pp f "@[<hov2>#%s@ %a@]" s self#directive_argument da
-end;;
+end
 
 
 let default = new printer ()
@@ -1417,18 +1417,18 @@ let string_of_expression x =
   ignore (flush_str_formatter ()) ;
   let f = str_formatter in
   default#expression f x ;
-  flush_str_formatter () ;;
+  flush_str_formatter () 
 let string_of_structure x =
   ignore (flush_str_formatter ());
   let f = str_formatter in
   default#structure f x;
-  flush_str_formatter ();;
+  flush_str_formatter ()
 
 let top_phrase f x =
   pp_print_newline f () ;
   toplevel_phrase f x;
-  pp f ";;" ;
-  pp_print_newline f ();;
+  pp f "" ;
+  pp_print_newline f ()
 
 let core_type=default#core_type
 let pattern=default#pattern

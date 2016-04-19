@@ -44,9 +44,9 @@ let merge_before_tags l =
       iter acc l2
   in
   iter [] l
-;;
 
-let version_separators = Str.regexp "[\\.\\+]";;
+
+let version_separators = Str.regexp "[\\.\\+]"
 
 (** Merge two Odoctypes.info struture, completing the information of
    the first one with the information in the second one.

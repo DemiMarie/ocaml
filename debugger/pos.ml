@@ -13,9 +13,9 @@
 (*                                                                        *)
 (**************************************************************************)
 
-open Instruct;;
-open Lexing;;
-open Location;;
+open Instruct
+open Lexing
+open Location
 
 let get_desc ev =
   let loc = ev.ev_loc in
@@ -23,4 +23,4 @@ let get_desc ev =
                  loc.loc_start.pos_fname loc.loc_start.pos_lnum
                  (loc.loc_start.pos_cnum - loc.loc_start.pos_bol + 1)
                  (loc.loc_end.pos_cnum - loc.loc_start.pos_bol + 1)
-;;
+

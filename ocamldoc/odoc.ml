@@ -76,8 +76,8 @@ let load_plugin file =
   | Failure s ->
       prerr_endline (Odoc_messages.load_file_error file s);
       exit 1
-;;
-List.iter load_plugin plugins;;
+
+let () = List.iter load_plugin plugins
 
 let () = print_DEBUG "Fin du chargement dynamique eventuel"
 

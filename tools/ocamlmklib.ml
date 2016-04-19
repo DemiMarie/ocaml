@@ -55,13 +55,11 @@ exception Bad_argument of string
 
 let print_version () =
   printf "ocamlmklib, version %s\n" Sys.ocaml_version;
-  exit 0;
-;;
+  exit 0
 
 let print_version_num () =
   printf "%s\n" Sys.ocaml_version;
-  exit 0;
-;;
+  exit 0
 
 let parse_arguments argv =
   let i = ref 1 in
@@ -227,7 +225,7 @@ let prepostfix pre name post =
   let base = Filename.basename name in
   let dir = Filename.dirname name in
   Filename.concat dir (pre ^ base ^ post)
-;;
+
 
 let transl_path s =
   match Sys.os_type with

@@ -132,7 +132,7 @@ type rhs_kind =
   | RHS_floatblock of int
   | RHS_nonrec
   | RHS_function of int * int
-;;
+
 
 let rec check_recordwith_updates id e =
   match e with
@@ -140,7 +140,7 @@ let rec check_recordwith_updates id e =
       -> id2 = id && check_recordwith_updates id cont
   | Lvar id2 -> id2 = id
   | _ -> false
-;;
+
 
 let rec size_of_lambda = function
   | Lfunction{params} as funct ->

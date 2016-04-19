@@ -19,7 +19,7 @@ val fatal_error: string -> 'a
 val fatal_errorf: ('a, Format.formatter, unit, 'b) format4 -> 'a
 exception Fatal_error
 
-val try_finally : (unit -> 'a) -> (unit -> unit) -> 'a;;
+val try_finally : (unit -> 'a) -> (unit -> unit) -> 'a
 
 val map_end: ('a -> 'b) -> 'a list -> 'b list -> 'b list
         (* [map_end f l t] is [map f l @ t], just more efficient. *)
@@ -274,7 +274,7 @@ module Color : sig
     | Magenta
     | Cyan
     | White
-  ;;
+  
 
   type style =
     | FG of color (* foreground *)

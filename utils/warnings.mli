@@ -75,21 +75,21 @@ type t =
   | Ambiguous_pattern of string list        (* 57 *)
   | No_cmx_file of string                   (* 58 *)
   | Assignment_to_non_mutable_value         (* 59 *)
-;;
 
-val parse_options : bool -> string -> unit;;
 
-val is_active : t -> bool;;
-val is_error : t -> bool;;
+val parse_options : bool -> string -> unit
 
-val defaults_w : string;;
-val defaults_warn_error : string;;
+val is_active : t -> bool
+val is_error : t -> bool
 
-val print : formatter -> t -> unit;;
+val defaults_w : string
+val defaults_warn_error : string
 
-exception Errors of int;;
+val print : formatter -> t -> unit
 
-val check_fatal : unit -> unit;;
+exception Errors of int
+
+val check_fatal : unit -> unit
 val reset_fatal: unit -> unit
 
 val help_warnings: unit -> unit

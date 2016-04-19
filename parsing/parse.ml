@@ -27,7 +27,7 @@ let rec skip_phrase lexbuf =
     | Lexer.Error (Lexer.Unterminated_string, _)
     | Lexer.Error (Lexer.Unterminated_string_in_comment _, _)
     | Lexer.Error (Lexer.Illegal_character _, _) -> skip_phrase lexbuf
-;;
+
 
 let maybe_skip_phrase lexbuf =
   if Parsing.is_current_lookahead Parser.SEMISEMI

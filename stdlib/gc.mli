@@ -258,7 +258,7 @@ val finalise : ('a -> unit) -> 'a -> unit
 
    Instead you should make sure that [v] is not in the closure of
    the finalisation function by writing:
-   - [ let f = fun x -> ... ;; let v = ... in Gc.finalise f v ]
+   - [ let f = fun x -> ...  let v = ... in Gc.finalise f v ]
 
 
    The [f] function can use all features of OCaml, including

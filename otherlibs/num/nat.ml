@@ -15,7 +15,7 @@
 
 open Int_misc
 
-type nat;;
+type nat
 
 external create_nat: int -> nat = "create_nat"
 external set_to_zero_nat: nat -> int -> int -> unit = "set_to_zero_nat"
@@ -69,7 +69,7 @@ let _ = initialize_nat()
 
 let length_nat (n : nat) = Obj.size (Obj.repr n) - 1
 
-let length_of_digit = Sys.word_size;;
+let length_of_digit = Sys.word_size
 
 let make_nat len =
   if len < 0 then invalid_arg "make_nat" else
@@ -259,11 +259,11 @@ let sqrt_nat rad off len =
     end
    else cand in
   loop ()
- end;;
+ end
 
-let power_base_max = make_nat 2;;
+let power_base_max = make_nat 2
 
-match length_of_digit with
+let () = match length_of_digit with
   | 64 ->
       set_digit_nat power_base_max 0 (Int64.to_int 1000000000000000000L);
       ignore
@@ -271,27 +271,27 @@ match length_of_digit with
            power_base_max 0 1 (nat_of_int 9) 0)
   | 32 -> set_digit_nat power_base_max 0 1000000000
   | _ -> assert false
-;;
+
 
 let pmax =
   match length_of_digit with
   | 64 -> 19
   | 32 -> 9
   | _ -> assert false
-;;
+
 
 let max_superscript_10_power_in_int =
   match length_of_digit with
   | 64 -> 18
   | 32 -> 9
   | _ -> assert false
-;;
+
 let max_power_10_power_in_int =
   match length_of_digit with
   | 64 -> nat_of_int (Int64.to_int 1000000000000000000L)
   | 32 -> nat_of_int 1000000000
   | _ -> assert false
-;;
+
 
 let raw_string_of_digit nat off =
   if is_nat_int nat off 1

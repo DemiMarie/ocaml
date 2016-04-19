@@ -1,11 +1,11 @@
 {
-open Lexing;;
+open Lexing
 
 let need_space =
-  ref false;;
+  ref false
 
 let addspace () =
-  if !need_space then begin print_char ' '; need_space := false end;;
+  if !need_space then begin print_char ' '; need_space := false end
 }
 
 rule main = parse

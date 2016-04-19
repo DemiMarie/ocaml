@@ -80,7 +80,7 @@ let print_float f =
   if String.contains f '.'
   then printf "%s" f
   else printf "%s." f
-;;
+
 
 let rec print_struct_const = function
     Const_base(Const_int i) -> printf "%d" i
@@ -248,7 +248,7 @@ type shape =
   | Switch
   | Closurerec
   | Pubmet
-;;
+
 
 let op_shapes = [
   opACC0, Nothing;
@@ -399,7 +399,7 @@ let op_shapes = [
   opBREAK, Nothing;
   opRERAISE, Nothing;
   opRAISE_NOTRACE, Nothing;
-];;
+]
 
 let print_event ev =
   if !print_locations then
@@ -466,8 +466,7 @@ let print_instr ic =
     | Nothing -> ()
   with Not_found -> print_string " (unknown arguments)"
   end;
-  print_string "\n";
-;;
+  print_string "\n"
 
 (* Disassemble a block of code *)
 

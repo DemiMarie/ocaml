@@ -19,8 +19,8 @@ open Asttypes
 open Types
 open Typedtree
 
-let print_DEBUG3 s = print_string s ; print_newline ();;
-let print_DEBUG s = print_string s ; print_newline ();;
+let print_DEBUG3 s = print_string s ; print_newline ()
+let print_DEBUG s = print_string s ; print_newline ()
 
 type typedtree = (Typedtree.structure * Typedtree.module_coercion)
 

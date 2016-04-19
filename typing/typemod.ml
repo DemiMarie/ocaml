@@ -1610,7 +1610,7 @@ let type_implementation sourcefile outputprefix modulename initial_env ast =
       Typecore.force_delayed_checks ();
       (* See comment above. Here the target signature contains all
          the value being exported. We can still capture unused
-         declarations like "let x = true;; let x = 1;;", because in this
+         declarations like "let x = true let x = 1", because in this
          case, the inferred signature contains only the last declaration. *)
       if not !Clflags.dont_write_files then begin
         let deprecated = Builtin_attributes.deprecated_of_str ast in

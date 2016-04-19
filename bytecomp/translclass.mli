@@ -18,7 +18,7 @@ open Lambda
 
 val transl_class :
   Ident.t list -> Ident.t ->
-  string list -> class_expr -> Asttypes.virtual_flag -> lambda;;
+  string list -> class_expr -> Asttypes.virtual_flag -> lambda
 
 type error = Illegal_class_expr | Tags of string * string
 

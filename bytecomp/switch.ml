@@ -798,7 +798,7 @@ let make_clusters ({cases=cases ; actions=actions} as s) n_clusters k =
   let acts = Array.make !index (fun _ -> assert false) in
   Hashtbl.iter (fun _ (i,act) -> acts.(i) <- act) t ;
   {cases = r ; actions = acts}
-;;
+
 
 
 let do_zyva (low,high) arg cases actions =
@@ -853,6 +853,6 @@ and test_sequence arg cases actions =
   prerr_endline "" ;
 *)
   hs (c_test {arg=arg ; off=0} s)
-;;
+
 
 end

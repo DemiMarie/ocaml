@@ -113,12 +113,12 @@ let re node =
   Cmt_format.add_saved_type (Cmt_format.Partial_expression node);
   Stypes.record (Stypes.Ti_expr node);
   node
-;;
+
 let rp node =
   Cmt_format.add_saved_type (Cmt_format.Partial_pattern node);
   Stypes.record (Stypes.Ti_pat node);
   node
-;;
+
 
 
 type recarg =
@@ -438,7 +438,7 @@ let has_variants p =
 let pattern_variables = ref ([] :
  (Ident.t * type_expr * string loc * Location.t * bool (* as-variable *)) list)
 let pattern_force = ref ([] : (unit -> unit) list)
-let pattern_scope = ref (None : Annot.ident option);;
+let pattern_scope = ref (None : Annot.ident option)
 let allow_modules = ref false
 let module_variables = ref ([] : (string loc * Location.t) list)
 let reset_pattern scope allow =
@@ -446,8 +446,7 @@ let reset_pattern scope allow =
   pattern_force := [];
   pattern_scope := scope;
   allow_modules := allow;
-  module_variables := [];
-;;
+  module_variables := []
 
 let enter_variable ?(is_module=false) ?(is_as_variable=false) loc name ty =
   if List.exists (fun (id, _, _, _, _) -> Ident.name id = name.txt)
@@ -891,7 +890,7 @@ let type_label_a_list ?labels loc closed env type_lbl_a opath lid_a_list k =
       lbl_a_list
   in
   map_fold_cont type_lbl_a lbl_a_list k
-;;
+
 
 (* Checks over the labels mentioned in a record pattern:
    no duplicate definitions (error); properly closed (warning) *)
@@ -1873,10 +1872,10 @@ let duplicate_ident_types caselist env =
    For example:
 
        (* Before patch *)
-       # let x : string = (5 : int);;
+       # let x : string = (5 : int)
                            ^
        (* After patch *)
-       # let x : string = (5 : int);;
+       # let x : string = (5 : int)
                           ^^^^^^^^^
 *)
 let proper_exp_loc exp =

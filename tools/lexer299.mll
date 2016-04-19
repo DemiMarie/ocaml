@@ -128,7 +128,7 @@ type error =
   | Unterminated_comment
   | Unterminated_string
   | Unterminated_string_in_comment
-;;
+
 
 exception Error of error * int * int
 
@@ -235,8 +235,8 @@ let char_for_decimal_code lexbuf i =
   Char.chr(c land 0xFF)
 
 (* To store the position of the beginning of a string and comment *)
-let string_start_pos = ref 0;;
-let comment_start_pos = ref [];;
+let string_start_pos = ref 0
+let comment_start_pos = ref []
 
 (* Error report *)
 
@@ -251,7 +251,7 @@ let report_error ppf = function
       fprintf ppf "String literal not terminated"
   | Unterminated_string_in_comment ->
       fprintf ppf "This comment contains an unterminated string literal"
-;;
+
 
 }
 

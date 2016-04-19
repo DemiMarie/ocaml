@@ -1,13 +1,12 @@
 {
-  open Lexing;;
-  open Printf;;
+  open Lexing
+  open Printf
 
   let print_char_repr c =
   match c with
   | '\'' -> printf "{\\textquotesingle}"
   | '`' -> printf "{\\textasciigrave}"
-  | _ -> printf "\\char%d" (int_of_char c);
-  ;;
+  | _ -> printf "\\char%d" (int_of_char c)
 }
 
 rule main = parse

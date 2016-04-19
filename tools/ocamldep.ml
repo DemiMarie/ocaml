@@ -20,7 +20,7 @@ module StringMap = Depend.StringMap
 let ppf = Format.err_formatter
 (* Print the dependencies *)
 
-type file_kind = ML | MLI;;
+type file_kind = ML | MLI
 
 let load_path = ref ([] : (string * string array) list)
 let ml_synonyms = ref [".ml"]
@@ -183,7 +183,7 @@ let print_filename s =
     loop 0 0;
     print_bytes result;
   end
-;;
+
 
 let print_dependencies target_files deps =
   let rec print_items pos = function
@@ -523,7 +523,7 @@ let parse_map fname =
   end;
   let mm = Depend.(weaken_map (StringSet.singleton modname) mm) in
   module_map := StringMap.add modname mm !module_map
-;;
+
 
 
 (* Entry point *)
@@ -532,13 +532,11 @@ let usage = "Usage: ocamldep [options] <source files>\nOptions are:"
 
 let print_version () =
   Format.printf "ocamldep, version %s@." Sys.ocaml_version;
-  exit 0;
-;;
+  exit 0
 
 let print_version_num () =
   Format.printf "%s@." Sys.ocaml_version;
-  exit 0;
-;;
+  exit 0
 
 let _ =
   Clflags.classic := false;

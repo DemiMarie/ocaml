@@ -45,7 +45,7 @@ let process_implementation_file ppf name =
   Optcompile.implementation ppf name opref ~backend;
   objfiles := (opref ^ ".cmx") :: !objfiles
 
-let cmxa_present = ref false;;
+let cmxa_present = ref false
 
 let process_file ppf name =
   if Filename.check_suffix name ".ml"
@@ -78,20 +78,19 @@ let ppf = Format.err_formatter
 (* Error messages to standard error formatter *)
 let anonymous filename =
   readenv ppf (Before_compile filename);
-  process_file ppf filename;;
+  process_file ppf filename
 
 let impl filename =
   readenv ppf (Before_compile filename);
-  process_implementation_file ppf filename;;
+  process_implementation_file ppf filename
 
 let intf filename =
   readenv ppf (Before_compile filename);
-  process_interface_file ppf filename;;
+  process_interface_file ppf filename
 
 let show_config () =
   Config.print_config stdout;
-  exit 0;
-;;
+  exit 0
 
 module Options = Main_args.Make_optcomp_options (struct
   let set r () = r := true
@@ -271,7 +270,7 @@ module Options = Main_args.Make_optcomp_options (struct
   let _opaque = set opaque
 
   let anonymous = anonymous
-end);;
+end)
 
 let main () =
   native_code := true;

@@ -52,13 +52,11 @@ let file_argument name =
 
 let print_version () =
   Printf.printf "The OCaml toplevel, version %s\n" Sys.ocaml_version;
-  exit 0;
-;;
+  exit 0
 
 let print_version_num () =
   Printf.printf "%s\n" Sys.ocaml_version;
-  exit 0;
-;;
+  exit 0
 
 module Options = Main_args.Make_opttop_options (struct
   let set r () = r := true
@@ -198,7 +196,7 @@ module Options = Main_args.Make_opttop_options (struct
   let _open s = open_modules := s :: !open_modules
 
   let anonymous = file_argument
-end);;
+end)
 
 let main () =
   native_code := true;

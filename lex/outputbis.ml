@@ -236,6 +236,6 @@ let output_lexdef ic oc tr header rh
         (fun e -> output_string oc "and ";
           output_entry ic oc has_refill tr e)
         entries;
-      output_string oc ";;\n\n";
+      output_string oc "\n\n";
   end;
   copy_chunk ic oc tr trailer false

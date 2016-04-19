@@ -112,7 +112,7 @@ let rec do_go n =
   )else(
     do_go_smallint (Int64.to_int n)
   )
-;;
+
 
 (* Perform a checkpoint *)
 

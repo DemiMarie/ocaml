@@ -1492,7 +1492,7 @@ let get_mod_field modname field =
 
 let code_force_lazy_block =
   get_mod_field "CamlinternalLazy" "force_lazy_block"
-;;
+
 
 (* inline_lazy_force inlines the beginning of the code of Lazy.force. When
    the value argument is tagged as:

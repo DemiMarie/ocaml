@@ -7,7 +7,7 @@ let pat = [%pat? _ as x]
 let e = [%expr fun (x, [%p pat]) -> x + [%e x] + 1]
 let () = Format.printf "%a@." (Printast.expression 0) e
 
-;;[@@metaloc loc2]
+[@@metaloc loc2]
 
 let e = [%expr fun (x, [%p pat]) -> x + [%e x] + 1] [@metaloc loc1]
 let () = Format.printf "%a@." (Printast.expression 0) e
