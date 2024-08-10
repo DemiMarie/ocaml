@@ -25,7 +25,7 @@ let mk_alert f =
     \        ++<alertname> treat <alertname> as fatal error\n\
     \        --<alertname> treat <alertname> as non-fatal\n\
     \        @<alertname>  enable <alertname> and treat it as fatal error\n\
-    \    <alertname> can be 'all' to refer to all alert names";;
+    \    <alertname> can be 'all' to refer to all alert names"
 
 let mk_absname f =
   "-absname", Arg.Unit f, " Show absolute filenames in error messages"
@@ -916,13 +916,13 @@ module type Bytecomp_options = sig
   val _dcamlprimc : unit -> unit
 
   val _use_prims : string -> unit
-end;;
+end
 
 module type Bytetop_options = sig
   include Toplevel_options
   val _dinstr : unit -> unit
 
-end;;
+end
 
 module type Optcommon_options = sig
   val _compact : unit -> unit
@@ -978,7 +978,7 @@ module type Optcommon_options = sig
   val _dlinear :  unit -> unit
   val _dinterval : unit -> unit
   val _dstartup :  unit -> unit
-end;;
+end
 
 module type Optcomp_options = sig
   include Core_options
@@ -993,14 +993,14 @@ module type Optcomp_options = sig
   val _afl_inst_ratio : int -> unit
   val _function_sections : unit -> unit
   val _save_ir_after : string -> unit
-end;;
+end
 
 module type Opttop_options = sig
   include Toplevel_options
   include Optcommon_options
   val _verbose : unit -> unit
   val _S : unit -> unit
-end;;
+end
 
 module type Ocamldoc_options = sig
   include Common_options
@@ -1016,7 +1016,7 @@ end
 
 module type Arg_list = sig
     val list : (string * Arg.spec * string) list
-end;;
+end
 
 module Make_bytecomp_options (F : Bytecomp_options) =
 struct
@@ -1139,7 +1139,7 @@ struct
     mk_args F._args;
     mk_args0 F._args0;
   ]
-end;;
+end
 
 module Make_bytetop_options (F : Bytetop_options) =
 struct
@@ -1210,7 +1210,7 @@ struct
     mk_args0 F._args0;
     mk_eval F._eval;
   ]
-end;;
+end
 
 module Make_optcomp_options (F : Optcomp_options) =
 struct
@@ -1377,7 +1377,7 @@ struct
     mk_args F._args;
     mk_args0 F._args0;
   ]
-end;;
+end
 
 module Make_opttop_options (F : Opttop_options) = struct
   let list = [
@@ -1485,7 +1485,7 @@ module Make_opttop_options (F : Opttop_options) = struct
     mk_dump_pass F._dump_pass;
     mk_eval F._eval;
   ]
-end;;
+end
 
 module Make_ocamldoc_options (F : Ocamldoc_options) =
 struct
@@ -1535,7 +1535,7 @@ struct
     mk_w F._w;
     mk__ F.anonymous;
   ]
-end;;
+end
 
 [@@@ocaml.warning "-40"]
 let options_with_command_line_syntax_inner r after_rest =
@@ -1816,13 +1816,11 @@ module Default = struct
 
     let print_version () =
       Printf.printf "The OCaml toplevel, version %s\n" Sys.ocaml_version;
-      raise (Compenv.Exit_with_status 0);
-    ;;
+      raise (Compenv.Exit_with_status 0)
 
     let print_version_num () =
       Printf.printf "%s\n" Sys.ocaml_version;
-      raise (Compenv.Exit_with_status 0);
-    ;;
+      raise (Compenv.Exit_with_status 0)
 
     let _args (_:string) = (* placeholder: wrap_expand Arg.read_arg *) [||]
     let _args0 (_:string) = (* placeholder: wrap_expand Arg.read_arg0 *) [||]

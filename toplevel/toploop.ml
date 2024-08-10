@@ -296,7 +296,6 @@ let look_ahead ~print_warnings lb =
       R (Lexer.print_warnings, print_warnings);
       Location.(R (report_printer, fun () -> batch_mode_printer));
     ] (fun () -> Lexer.token shadow)
-;;
 
 (* Refill the buffer until the next linefeed or end-of-file that is not
    inside a comment and check that its contents can be ignored.

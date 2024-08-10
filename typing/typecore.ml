@@ -593,8 +593,7 @@ let copy_type_pat_state
 let blit_type_pat_state ~src ~dst =
   dst.tps_pattern_variables <- src.tps_pattern_variables;
   dst.tps_module_variables <- src.tps_module_variables;
-  dst.tps_pattern_force <- src.tps_pattern_force;
-;;
+  dst.tps_pattern_force <- src.tps_pattern_force
 
 let maybe_add_pattern_variables_ghost loc_let env pv =
   List.fold_right

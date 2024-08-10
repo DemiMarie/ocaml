@@ -3,7 +3,7 @@
  expect;
 *)
 
-open CamlinternalOO;;
+open CamlinternalOO
 
 type _ choice = Left : label choice | Right : tag choice;;
 [%%expect {|

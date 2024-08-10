@@ -1138,7 +1138,6 @@ let message = function
   | Generative_application_expects_unit ->
       "A generative functor\n\
        should be applied to '()'; using '(struct end)' is deprecated."
-;;
 
 let nerrors = ref 0
 
